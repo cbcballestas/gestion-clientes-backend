@@ -7,8 +7,7 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class GlobalException extends RuntimeException{
-    static final long serialVersionUID = 5749856875670463588L;
+public class GlobalException extends RuntimeException {
 
     final HttpStatus status;
 

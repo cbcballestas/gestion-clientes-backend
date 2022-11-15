@@ -1,6 +1,7 @@
 package com.cballestas.springboot.backend.apirest.util;
 
 import com.cballestas.springboot.backend.apirest.exception.GlobalException;
+import com.cballestas.springboot.backend.apirest.exception.ResourceNotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -25,13 +26,24 @@ public class RestUtil {
      */
     public static <T> T checkFound(Optional<T> resource, Long id) {
         if (!resource.isPresent()) {
-            logger.error(String.format(Constants.ERROR_MESSAGE_NOT_FOUND, id));
-            throw new GlobalException(
-                    String.format(Constants.ERROR_MESSAGE_NOT_FOUND, id),
-                    HttpStatus.NOT_FOUND
-            );
+            logger.error(Constants.ERROR_MESSAGE_NOT_FOUND_LOGGER, id);
+            throw new ResourceNotFoundException(String.format(Constants.ERROR_MESSAGE_NOT_FOUND, id));
         }
 
         return resource.get();
+    }
+
+    /**
+     * Método que se encarga de verificar si el email ingresado ya existe
+     *
+     * @param resource recurso a verificar
+     * @param <T>      tipo del recurso a verificar
+     */
+    public static <T> void checkExistingEmail(Optional<T> resource) {
+        if (resource.isPresent()) {
+            logger.error(Constants.ERROR_MESSAGE_EXISTING_EMAIL);
+            throw new GlobalException(Constants.ERROR_MESSAGE_EXISTING_EMAIL, HttpStatus.BAD_REQUEST);
+        }
+
     }
 }
