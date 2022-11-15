@@ -2,15 +2,9 @@ package com.cballestas.springboot.backend.apirest.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -21,7 +15,7 @@ import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
 @Entity
-@Table(name = "clientes")
+@Table(name = "clientes", uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
 @Getter
 @Setter
 @ToString
@@ -30,22 +24,37 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Cliente implements Serializable {
 
-	static final long serialVersionUID = 1L;
+    static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cliente_sequence")
-	@SequenceGenerator(name = "cliente_sequence", sequenceName = "cliente_sequence", allocationSize = 1, initialValue = 12)
-	Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cliente_sequence")
+    @SequenceGenerator(name = "cliente_sequence", sequenceName = "cliente_sequence", allocationSize = 1, initialValue = 13)
+    Long id;
 
-	String nombre;
-	String apellido;
-	String email;
+    @Column(nullable = false)
+    String nombre;
 
-	@Column(name = "created_at")
-	LocalDate createdAt;
+    @Column(nullable = false)
+    String apellido;
 
-	@PrePersist
-	public void prePersist() {
-		this.createdAt = LocalDate.now();
-	}
+    @Column(nullable = false)
+    String email;
+
+    @Column(nullable = false, name = "fecha_nacimiento")
+    LocalDate fechaNacimiento;
+
+    @Column(name = "created_at")
+    LocalDateTime createdAt;
+    @Column(name = "updated_at")
+    LocalDateTime updatedAt;
+
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
 }

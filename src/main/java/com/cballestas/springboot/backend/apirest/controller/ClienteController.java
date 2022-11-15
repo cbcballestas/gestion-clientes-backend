@@ -1,24 +1,31 @@
 package com.cballestas.springboot.backend.apirest.controller;
 
 import com.cballestas.springboot.backend.apirest.dto.ClienteDTO;
+import com.cballestas.springboot.backend.apirest.dto.PaginatedResponseDTO;
 import com.cballestas.springboot.backend.apirest.service.IClienteService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.cballestas.springboot.backend.apirest.util.Constants;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:4200"})
 @RequestMapping("api/v1/clientes")
 public class ClienteController {
+    private final IClienteService clienteService;
 
-    @Autowired
-    private IClienteService clienteService;
+    public ClienteController(IClienteService clienteService) {
+        this.clienteService = clienteService;
+    }
 
     @GetMapping
-    public ResponseEntity<List<ClienteDTO>> listarClientes() {
-        return clienteService.listarClientes();
+    public ResponseEntity<PaginatedResponseDTO<ClienteDTO>> listarClientes(
+            @RequestParam(name = "page", defaultValue = Constants.PAGE, required = false) int page,
+            @RequestParam(name = "size", defaultValue = Constants.SIZE, required = false) int size,
+            @RequestParam(name = "orderBy", defaultValue = Constants.SORT_ORDER, required = false) String sortOrder,
+            @RequestParam(name = "sortDir", defaultValue = Constants.SORT_DIR, required = false) String sortDir) {
+        return clienteService.listarClientes(page, size, sortOrder, sortDir);
     }
 
     @GetMapping("/{id}")
@@ -27,13 +34,13 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<ClienteDTO> guardarCliente(@RequestBody ClienteDTO clienteDTO) {
+    public ResponseEntity<ClienteDTO> guardarCliente(@Valid @RequestBody ClienteDTO clienteDTO) {
         return clienteService.guardarCliente(clienteDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ClienteDTO> actualizarCliente(
-            @PathVariable(name = "id") Long id, @RequestBody ClienteDTO clienteDTO) {
+    public ResponseEntity<ClienteDTO> actualizarCliente(@PathVariable(name = "id") Long id,
+                                                        @Valid @RequestBody ClienteDTO clienteDTO) {
         return clienteService.actualizarCliente(id, clienteDTO);
     }
 
