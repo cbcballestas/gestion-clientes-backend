@@ -2,10 +2,13 @@ package com.cballestas.springboot.backend.apirest.controller;
 
 import com.cballestas.springboot.backend.apirest.dto.ClienteDTO;
 import com.cballestas.springboot.backend.apirest.dto.PaginatedResponseDTO;
+import com.cballestas.springboot.backend.apirest.dto.UpdatedProfilePhotoDTO;
 import com.cballestas.springboot.backend.apirest.service.IClienteService;
 import com.cballestas.springboot.backend.apirest.util.Constants;
+import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 
@@ -47,5 +50,17 @@ public class ClienteController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarCliente(@PathVariable(name = "id") Long id) {
         return clienteService.eliminarCliente(id);
+    }
+
+    @PostMapping("/upload")
+    public ResponseEntity<UpdatedProfilePhotoDTO> subirFotoPerfil(
+            @RequestParam(name = "archivo") MultipartFile archivo,
+            @RequestParam(name = "id") Long id) {
+        return clienteService.asignarFotoPerfil(archivo, id);
+    }
+
+    @GetMapping("/img")
+    public ResponseEntity<Resource> descargarFotoPerfil(@RequestParam(name = "foto") String nombreFoto) {
+        return clienteService.obtenerFotoPerfil(nombreFoto);
     }
 }
