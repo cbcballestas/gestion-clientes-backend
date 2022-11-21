@@ -36,4 +36,6 @@ public class ClienteDTO {
     @NotNull(message = "DEBE ingresar una fecha de nacimiento")
     @NotEmpty(message = "El campo fecha de nacimiento NO puede ser vacío")
     String fechaNacimiento;
+
+    String foto;
 }

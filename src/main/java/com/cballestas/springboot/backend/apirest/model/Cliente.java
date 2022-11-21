@@ -43,6 +43,8 @@ public class Cliente implements Serializable {
     @Column(nullable = false, name = "fecha_nacimiento")
     LocalDate fechaNacimiento;
 
+    String foto;
+
     @Column(name = "created_at")
     LocalDateTime createdAt;
     @Column(name = "updated_at")

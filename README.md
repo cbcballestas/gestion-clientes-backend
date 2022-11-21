@@ -2,11 +2,11 @@
 Backend para sistema de gestión de clientes, curso Angular & Spring Boot: Creando web app full stack, se usa como motor de base de datos PostgreSQL
 
 ## Requirements
-- [JDK 8](https://www.oracle.com/co/java/technologies/javase/javase8-archive-downloads.html)
+- [JDK 11](https://www.oracle.com/co/java/technologies/javase/jdk11-archive-downloads.html)
 - [Maven 3](https://maven.apache.org/)
 - PostgreSQL
 
-You will need to setup your database (or create your own) with the following configuration
+You will need to set up your database (or create your own) with the following configuration
 ``` properties
 spring.datasource.url=jdbc:postgresql://localhost:5433/db_name
 spring.datasource.username=
