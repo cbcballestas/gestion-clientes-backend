@@ -11,6 +11,7 @@ You will need to set up your database (or create your own) with the following co
 spring.datasource.url=jdbc:postgresql://localhost:5433/db_name
 spring.datasource.username=
 spring.datasource.password=
+spring.datasource.driver-class-name=org.postgresql.Driver
 ```
 
 ## Run application
