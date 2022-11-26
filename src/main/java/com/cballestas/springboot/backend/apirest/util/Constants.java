@@ -9,6 +9,8 @@ public class Constants {
     // Utils
     public static final String PATTERN_EMAIL = "[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z]{2,3}";
     public static final String UPLOAD_DIR = "uploads";
+    public static final String STATIC_FILES_DIR = "src/main/resources/static/images";
+    public static final String NO_PROFILE_PHOTO_FILE = "no-usuario.png";
 
     // Pagination
     public static final String PAGE = "0";
@@ -31,8 +33,6 @@ public class Constants {
     public static final String ERROR_MESSAGE_UPLOAD_FILE_DETAILED = ERROR_MESSAGE_UPLOAD_FILE + ", Error:[{}], Excepcion:[{}]";
     public static final String ERROR_MESSAGE_DELETE_FILE = "Error al eliminar archivo";
     public static final String ERROR_MESSAGE_DELETE_FILE_DETAILED = ERROR_MESSAGE_UPLOAD_FILE + ", Error:[{}], Excepcion:[{}]";
-    public static final String ERROR_MESSAGE_RESOURCE_NOT_FOUND = "El recurso a buscar NO existe";
-
     public static final String ERROR_CARGA_IMAGEN = "Error al cargar imagen";
     public static final String ERROR_CARGA_IMAGEN_DETAILED = ERROR_CARGA_IMAGEN + ", Imágen: [{}]";
 

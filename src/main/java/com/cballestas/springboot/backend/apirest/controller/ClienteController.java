@@ -60,7 +60,7 @@ public class ClienteController {
     }
 
     @GetMapping("/img")
-    public ResponseEntity<Resource> descargarFotoPerfil(@RequestParam(name = "foto") String nombreFoto) {
+    public ResponseEntity<Resource> obtenerFotoPerfil(@RequestParam(name = "foto") String nombreFoto) {
         return clienteService.obtenerFotoPerfil(nombreFoto);
     }
 }
