@@ -37,5 +37,8 @@ public class ClienteDTO {
     @NotEmpty(message = "El campo fecha de nacimiento NO puede ser vacío")
     String fechaNacimiento;
 
+    @NotNull(message = "La región NO puede estar vacía")
+    RegionDTO region;
+
     String foto;
 }
