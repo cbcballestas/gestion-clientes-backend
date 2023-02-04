@@ -7,6 +7,7 @@ import com.cballestas.springboot.backend.apirest.exception.GlobalException;
 import com.cballestas.springboot.backend.apirest.exception.ResourceErrorException;
 import com.cballestas.springboot.backend.apirest.exception.UploadFileException;
 import com.cballestas.springboot.backend.apirest.model.Cliente;
+import com.cballestas.springboot.backend.apirest.model.Region;
 import com.cballestas.springboot.backend.apirest.repo.IClienteRepository;
 import com.cballestas.springboot.backend.apirest.service.IClienteService;
 import com.cballestas.springboot.backend.apirest.service.IUploadFileService;
@@ -149,6 +150,7 @@ public class ClienteServiceImpl implements IClienteService {
         cliente.setNombre(clienteDTO.getNombre());
         cliente.setApellido(clienteDTO.getApellido());
         cliente.setEmail(clienteDTO.getEmail());
+        cliente.setRegion(converterUtil.mapearEntidad(clienteDTO.getRegion(), Region.class));
         cliente.setFechaNacimiento(LocalDate.parse(clienteDTO.getFechaNacimiento()));
 
         Cliente clientActualizado = clienteRepository.save(cliente);

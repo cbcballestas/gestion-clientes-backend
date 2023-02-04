@@ -1,18 +1,13 @@
 package com.cballestas.springboot.backend.apirest.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import javax.persistence.*;
-
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.experimental.FieldDefaults;
 
 @Entity
 @Table(name = "clientes", uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
@@ -44,6 +39,10 @@ public class Cliente implements Serializable {
     LocalDate fechaNacimiento;
 
     String foto;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    Region region;
 
     @Column(name = "created_at")
     LocalDateTime createdAt;
